@@ -1,3 +1,285 @@
-/* 
-    General Styles
-*/
+.card-container{
+    width: 700px;
+    height:555px;
+    margin: 10px;
+    border-radius: 30px;
+}
+body{
+    background-image: url("https://www.pixelstalk.net/wp-content/uploads/images6/The-latest-Star-Wars-Space-Background.jpg");
+}
+.navbar{
+    background-color: transparent;
+}
+.btn {
+  appearance: none;
+  background-color: #FFFFFF;
+  border-radius: 40em;
+  border-style: none;
+  box-shadow: #ADCFFF 0 -12px 6px inset;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -.24px;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.3rem;
+  quotes: auto;
+  text-align: center;
+  text-decoration: none;
+  transition: all .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn:hover {
+  background-color: #cffd00;
+  box-shadow: #ff1414 0 -6px 8px inset;
+  transform: scale(1.125);
+}
+.btn:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #ff0000;
+     -moz-box-shadow: inset 0px 0px 5px #0011ff;
+          box-shadow: inset 0px 0px 5px #ff00c8;
+   outline: red;
+}
+.btn:active {
+  transform: scale(1.025);
+}
+.dropdown-menu{
+  border-radius: 10px;
+}
+.fixed-top {
+  position: fixed;
+  top: 10px;
+  left: 1130px;
+  z-index: 1000;
+  width: 210px;
+}
+
+.info{
+ height: 5px;
+ width: 5px;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    font-size: 1.5rem;
+    padding: .75rem 2rem;
+  }
+}
+.star {
+    animation: star 10s ease-out infinite;
+  }
+  .wars {
+    animation: wars 10s ease-out infinite;
+  }
+
+  @keyframes star {
+    0% {
+      opacity: 0;
+      transform: scale(1.5) translateY(-0.75em);
+    }
+    20% {
+      opacity: 1;
+    }
+    89% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateZ(-1000em);
+    }
+  }
+  
+  @keyframes wars {
+    0% {
+      opacity: 0;
+      transform: scale(1.5) translateY(0.5em);
+    }
+    20% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateZ(-1000em);
+    }
+  }
+  
+  @keyframes spin-letters {
+    0%, 10% {
+      opacity: 0;
+      transform: rotateY(90deg);
+    }
+    30% {
+      opacity: 1;
+    }
+    70%, 86% {
+      transform: rotateY(0);
+      opacity: 1;
+    }
+    95%, 100% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes move-byline {
+    0% {
+      transform: translateZ(5em);
+    }
+    100% {
+      transform: translateZ(0);
+    }
+  }
+  
+
+  .starwars-demo {
+    perspective: 800px;
+    transform-style: preserve3d;
+  }
+  
+
+  body {
+    background: #000 url(//cssanimation.rocks/demo/starwars/images/bg.jpg);
+  }
+  
+  .starwars-demo {
+    height: 17em;
+    left: 50%;
+    position: absolute;
+    top: 53%;
+    transform: translate(-50%, -50%);
+    width: 34em;
+  }
+  
+  img {
+    width: 100%;
+  }
+  
+  .star, .wars {
+    position: absolute;
+  }
+  
+  .star {
+    top: -0.75em;
+  }
+  
+  .wars {
+    bottom: -0.5em;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .starwars-demo {
+      font-size: 10px;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .starwars-demo {
+      font-size: 7px;
+    }
+  }
+.btnL{
+  width: 110px;
+  font-size: 15px;
+  margin-left: -8px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+
+ 
+
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(250, 234, 7);
+  border: 5px solid rgb(255, 255, 255);
+
+  border-radius: 10px;
+}
+
+.shine {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% - 20px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow:
+    0 0 60px 30px #fff,
+    0 0 100px 60px #f0f,
+    0 0 140px 90px #0ff;
+}
+.icons{
+  color: yellow;
+  margin-right: 10px;
+  font-size: 30px;
+}
+.btnDel{
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 10px;
+}
+.cardlearnmore {
+  display: flex;
+  background-color: white;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-radius: 20px;
+  height: 750px;
+  width: 700px;
+  padding: 10px;
+}
+
+.card-body-lm {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body-lm img {
+  max-width: 80%;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+.ptag{
+  margin-left: -30px;
+  border-left: 1px solid rgba(0, 0, 0, 0.432);
+}
+.ptag p{
+  margin-top: 30px;
+  margin-left: 20px;
+  font-size: 20px;
+}
+.card-text{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: rgb(235, 235, 235);
+}
+
+
+
+
+
+
+
+
+
