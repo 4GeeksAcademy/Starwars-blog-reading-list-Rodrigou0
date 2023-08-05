@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import Character from "../component/character";
 import Planets from "../component/planets.jsx";
 import Vehicles from "../component/vehicles.jsx";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const Home = () => {
+
+	const {store, actions} = useContext(Context);
+	const [favoritesDropdownOpen, setFavoritesDropdownOpen] = useState(false);
 
 	const [characters, setCharacters] = useState([]);
 	const [planets, setPlanets] = useState ([]);
@@ -20,17 +24,6 @@ export const Home = () => {
 		getVehicles();
 	},[])
 
-	const addToFavorites = (item) => {
-		const isFavorite = favorites.some((favorite) => favorite.uid === item.uid);
-		if (!isFavorite) {
-		  setFavorites((prevFavorites) => [...prevFavorites, item]);
-		}
-	  };
-
-	const removeFromFavorites = (item) => {
-		event.stopPropagation();
-		setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.uid !== item.uid));
-	  };
 	const getPeople = () => {
 		fetch('https://www.swapi.tech/api/people/', {
 			method: "GET",
@@ -86,9 +79,7 @@ export const Home = () => {
 	const showCharacters = () => {
 		return characters.map((character, index) => {
 			return <Character character={character} image={`https://starwars-visualguide.com/assets/img/characters/${index +1}.jpg`}
-			key={character.uid}
-			addToFavorites={addToFavorites}
-			favorites={favorites}/>
+			key={character.uid}/>
 		})
 	}
 	const showPlanets = () => {
@@ -101,8 +92,6 @@ export const Home = () => {
 					planets={planet}
 					image={image}
 					key={planet.uid}
-					addToFavorites={addToFavorites}
-					favorites={favorites}
 				/>
 			);
 		});
@@ -110,40 +99,38 @@ export const Home = () => {
 	const showVehicles = () => {
 		return vehicles.map((vehicles) => {
 			return <Vehicles vehicles={vehicles} image={`https://wallpapercave.com/wp/wp6792288.jpg`}
-			key={vehicles.uid}
-			addToFavorites={addToFavorites}
-			favorites={favorites}/>
+			key={vehicles.uid}/>
 		})
 	}
 
 	return (
 		<div>
 			<div className="ml-auto dropdown d-flex justify-content-end">
-				<button
-					className="btn dropdown-toggle fixed-top"
-					type="button"
-					id="favoritesDropdown"
-					data-bs-toggle="dropdown"
-					aria-expanded="false"
-					>
-					Favorites ({favorites.length})
-				</button>
-				<ul className="dropdown-menu" aria-labelledby="favoritesDropdown">
-					{favorites.length === 0 ? (
+			<button
+				className="btn dropdown-toggle fixed-top"
+				type="button"
+				id="favoritesDropdown"
+				onClick={() => setFavoritesDropdownOpen(!favoritesDropdownOpen)}
+				aria-expanded={favoritesDropdownOpen ? "true" : "false"}
+			>
+				Favorites ({store.favorites.length})
+			</button>
+				<ul className={`dropdown-menu fixed-top ${favoritesDropdownOpen ? "show" : ""}`} aria-labelledby="favoritesDropdown">
+					{store.favorites.length === 0 ? (
 					<li>
-						<Link className="dropdown-item" to="#">
 						Empty
-						</Link>
 					</li>
 					) : (
-					favorites.map((favorite, index) => (
+					store.favorites.map((favorite, index) => (
 						<li className="d-flex align-items-center justify-content-between" key={index}>
-							<Link className="dropdown-item" to="#">
-								{favorite.name}
-							</Link>
+								{favorite}
 							<button
 								className="btnDel btn-danger"
-								onClick={() => removeFromFavorites(favorite)}>
+								onClick={(e) => {
+									e.stopPropagation(); 
+									actions.deleteFav(favorite);
+								}}
+							>
 								<i className="fa solid fa-trash"></i>
 							</button>
 						</li>

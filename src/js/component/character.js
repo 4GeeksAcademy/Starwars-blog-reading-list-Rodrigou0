@@ -1,14 +1,15 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useState, useContext} from "react";
 import { Link, BrowserRouter as Router } from "react-router-dom";
 import LearnMore from "./learnmore.jsx";
+import { Context } from "../store/appContext";
 
 const Character = (props) =>{
 
+    const {store, actions} = useContext(Context);
 
     console.log('character', props.character);
 
     const [character,setCharacter] = useState()
-    const [favorites, setFavorites] = useState([]);
 
     useEffect(() =>{
         getCharacter()
@@ -32,9 +33,6 @@ const Character = (props) =>{
             console.log(error);
         });
     }
-    const handleAddToFavorites = () => {
-        props.addToFavorites(props.character); 
-      };
     return(
         <div className="mycard card card-body card-container">
             <div className=" mycard">
@@ -61,7 +59,7 @@ const Character = (props) =>{
 
                         </div>
                         <div className="col-6 mt-2 ms-1" style={{width:"20px"}}>
-                            <button className="btn" onClick={handleAddToFavorites}>
+                            <button className="btn" onClick={()=> actions.addtoFavorites(props.character.name)}>
                                 <i className="fa fa-heart"></i>
                             </button>
                         </div>

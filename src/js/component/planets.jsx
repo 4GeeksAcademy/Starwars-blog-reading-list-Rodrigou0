@@ -1,8 +1,10 @@
-import React,{useState, useEffect} from "react";
+import React,{useState, useEffect, useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 const Planets =(props)=>{
 
 const [planets,setPlanets] = useState()
+const {store, actions} = useContext(Context);
 
 const getPlanets = () => {
     fetch("https://www.swapi.tech/api/planets/" + props.planets.uid, {
@@ -26,9 +28,6 @@ const getPlanets = () => {
     useEffect(() =>{
       getPlanets()
   },[])
-  const handleAddToFavorites = () => {
-    props.addToFavorites(props.planets); 
-  };
 
     return(
         <div className="mycard card card-body card-container">
@@ -52,8 +51,8 @@ const getPlanets = () => {
                       </Link>
                     </div>
                     <div className="col-6 mt-2 ms-1" style={{width:"30px"}}>
-                        <button className="btn">
-                            <i className="fa fa-heart" onClick={handleAddToFavorites}></i>
+                        <button className="btn" onClick={()=> actions.addtoFavorites(props.planets.name)}>
+                            <i className="fa fa-heart" ></i>
                         </button>
                     </div>
                 </div>

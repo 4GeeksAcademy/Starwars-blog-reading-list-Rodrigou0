@@ -1,12 +1,16 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect,useState, useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 const Vehicles =(props)=>{
 
     const [vehicles,setVehicles] = useState()
 
+    const {store, actions} = useContext(Context);
+
+
     const getVehicles = () => {
-      fetch("https://www.swapi.tech/api/vehicles/", {
+      fetch("https://www.swapi.tech/api/vehicles/" + props.vehicles.uid, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -17,14 +21,11 @@ const Vehicles =(props)=>{
         })
         .then(data => {
           console.log(data);
-          setVehicles(data.results);
+          setVehicles(data.result.properties);
         })
         .catch(error => {
           console.log(error);
         });
-    };
-    const handleAddToFavorites = () => {
-      props.addToFavorites(props.vehicles); 
     };
 
     useEffect(() =>{
@@ -40,7 +41,7 @@ const Vehicles =(props)=>{
             {vehicles ? (
                 <p className="card-text">
                     <p className='mt-0 mb-0'>passengers: {vehicles && vehicles.passengers}</p>
-                    <p className='mt-0 mb-0'>model: {vehicles.model}</p> 
+                    <p className='mt-0 mb-0'>model: {vehicles && vehicles.model}</p> 
                 </p>
             ) : (
                 <div className="spinner-border" role="status">
@@ -54,8 +55,8 @@ const Vehicles =(props)=>{
                         </Link>
                     </div>
                     <div className="col-6 mt-2 ms-1" style={{width:"30px"}}>
-                        <button className="btn">
-                            <i className="fa fa-heart" onClick={handleAddToFavorites}></i>
+                        <button className="btn" onClick={()=> actions.addtoFavorites(props.vehicles.name)}>
+                            <i className="fa fa-heart" ></i>
                         </button>
                     </div>
                 </div>
